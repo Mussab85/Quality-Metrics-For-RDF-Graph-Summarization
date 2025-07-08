@@ -1,15 +1,24 @@
 
 # Quality Metrics For RDF Graph Summarization
 
-You find here the  implementation of our Quality Framework for the RDF summaries the  takes as input the results of any RDF Graph Summarization algorithm and your  ideal summary and computes the different metrics that are required to capture the quality of the results at the different levels (schema and instance). For the schema level we compute  the precision, recall and F-measure for each class and its neighbourhood  of the produced summary against the ideal one.
-For the Instance level, we  compute if the existing instances are covered (i.e. can be retrieved) and in what degree by the proposed summary. Again we define and compute its precision, recall and F-measure against the data contained in the original KB. It outputs the values for the different metrics in an automated fashion and allows computing F-measures where applicable.
+This project provides an implementation of a Quality Evaluation Framework for RDF graph summaries. It takes as input the results of any RDF Graph Summarization algorithm and compares them with a reference (ideal) summary. It computes multiple quality metrics at two levels:
+- Schema Level: Measures precision, recall, and F1-score for classes and their neighborhoods.
+- Instance Level: Evaluates how well instances are covered and represented by the summary.
+The framework outputs these metrics in an automated fashion and produces a readable HTML report.
 
 ## Setup:
-Building this project requires the Apache Jena. All you need is in the lib folder, thus you should add all the jar files in the lib folder to the project build path. If you use  eclipse you need only to download the project and then import it and the all things will be ok.
-
+This project requires Apache Jena. All required `.jar` files are already included in the `lib` folder.
+To set up in Eclipse:
+1. Download or clone the project.
+2. Import it into Eclipse.
+3. Right-click the project > Build Path > Configure Build Path.
+4. Under Libraries, click Add JARs... and add all `.jar` files from the `lib` folder.
 ## Running the Project:
-Before running the project you need mapping your summary graph to a text file where each line of this file represents pattern. Each line should have the following format: 
-list of the properties mappings of the pattern  (the number of instances)  list of instances mappings represented by this pattern. 
+Before running the project, make sure you have(you have examples in Test_Files Folder):
+1. A mapped summary file (e.g., `mapped.txt`): Each line represents a pattern.
+2. A property mapping file (`propertyMap.txt`): Maps property URIs to IDs.
+3. An ideal RDF schema file (`ideal.rdf`): The reference summary to compare against
+ 
 For example, For the Knowledge patterns described in the following table.
 
 | PatternId | class | Properties  | Instances
@@ -46,8 +55,24 @@ Where the two following tables describe the two necessary property and instance 
 5 |Abraham  
 6| museum.es
 
-To run a project you should Run the Main.java class which you can found in www.etis.ensea.fr.main package. The Main.java takes 3 parameters as input:
-1. The maped text file
-2. The Property hashMap as a .txt file
-3. The RDF file of your ideal summary
- 
+## How to Run
+Run the `Main.java` class found in the `www.etis.ensea.fr.main` package.
+
+Command Line Arguments:
+java Main <mapped.txt> <propertyMap.txt> <ideal.rdf>
+
+- mapped.txt — The summary output mapped to property and instance IDs.
+- propertyMap.txt — The mapping of property URIs to integers.
+- ideal.rdf — The RDF file containing the ideal reference summary.
+## Output
+The program will compute all schema and instance metrics (precision, recall, F1).
+Results will be written to a file named:
+results.html
+The HTML file includes two tables:
+1. Schema Metrics
+2. Instance Metrics
+
+Each table contains precision, recall, F1-score, and overall F1 values.
+You can open this file with any web browser to visually inspect the evaluation.
+Authors & Contributions
+This tool was developed as part of the quality analysis framework for RDF summarization.
