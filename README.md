@@ -56,23 +56,28 @@ Where the two following tables describe the two necessary property and instance 
 6| museum.es
 
 ## How to Run
-Run the `Main.java` class found in the `www.etis.ensea.fr.main` package.
+java www.etis.ensea.fr.main.EvaluationGUI <mapped.txt> <propertyMap.txt> <ideal.rdf>
 
 Command Line Arguments:
-java Main <mapped.txt> <propertyMap.txt> <ideal.rdf>
-
-- mapped.txt — The summary output mapped to property and instance IDs.
-- propertyMap.txt — The mapping of property URIs to integers.
-- ideal.rdf — The RDF file containing the ideal reference summary.
+mapped.txt — The summary output mapped to property and instance IDs (binary matrix format).
+propertyMap.txt — The mapping of property URIs to integers.
+ideal.rdf — The RDF file containing the ideal reference summary (RDF/XML format)
 ## Output
-The program will compute all schema and instance metrics (precision, recall, F1).
-Results will be written to a file named:
-results.html
-The HTML file includes two tables:
-1. Schema Metrics
-2. Instance Metrics
+The program computes both schema and instance metrics, including precision, recall, and F1-score.
 
-Each table contains precision, recall, F1-score, and overall F1 values.
-You can open this file with any web browser to visually inspect the evaluation.
-Authors & Contributions
+The results are displayed directly in a graphical user interface (GUI), which includes two sections:
+
+1- Schema Metrics
+2- Instance Metrics
+
+Each section reports:
+Precision
+Recall
+F1-score
+Overall F1 score
+
+You can visually inspect the evaluation results in the GUI without needing to open any separate files.
+
+
+## Authors & Contributions
 This tool was developed as part of the quality analysis framework for RDF summarization.
